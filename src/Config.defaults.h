@@ -277,6 +277,9 @@
   #ifndef AXIS1_DRIVER_DECAY_GOTO
   #define AXIS1_DRIVER_DECAY_GOTO       OFF                       // OFF for default, TMC SPREADCYCLE
   #endif
+  #ifndef AXIS1_DRIVER_VREF_DIVIDER
+  #define AXIS1_DRIVER_VREF_DIVIDER     OFF                       
+  #endif
   #ifndef AXIS1_DRIVER_IHOLD
   #define AXIS1_DRIVER_IHOLD            OFF                       // in mA
   #endif
@@ -452,6 +455,9 @@
   #endif
   #ifndef AXIS2_DRIVER_DECAY_GOTO
   #define AXIS2_DRIVER_DECAY_GOTO       OFF
+  #endif
+  #ifndef AXIS2_DRIVER_VREF_DIVIDER
+  #define AXIS2_DRIVER_VREF_DIVIDER     OFF                       
   #endif
   #ifndef AXIS2_DRIVER_IHOLD
   #define AXIS2_DRIVER_IHOLD            OFF

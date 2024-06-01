@@ -103,6 +103,14 @@
   #define analogWriteEx(pin,value)     { analogWrite(pin,value); }
 #endif
 
+#ifndef dacWriteEx
+	#ifdef ESP32
+		#include "driver/dac.h"
+		#define dacWriteEx(pin,value) {dacWrite(pin,value*DAC_WRITE_RANGE/DAC_VREF);}
+	#else
+		#define dacWriteEx(pin,value) {analogWriteEx(pin,value);}
+	#endif
+#endif
 // supress compiler warnings for unused parameters
 #ifndef UNUSED
   #define UNUSED(x) (void)(x)
