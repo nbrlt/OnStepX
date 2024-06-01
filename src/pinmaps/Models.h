@@ -2,6 +2,11 @@
 // Loads pinmap model for current configuration
 #pragma once
 
+
+#if PINMAP == UniESP
+  #define PINMAP_STR "Unipolar Stepper ESP V1 "
+  #include "Pins.UniESP.h"
+#endif
 #if PINMAP == MiniPCB
   #define PINMAP_STR "MiniPCB v1"
   #include "Pins.MiniPCB.h"
@@ -66,10 +71,6 @@
 #if PINMAP == FYSETC_S6_2
   #define PINMAP_STR "FYSETC S6 v2"
   #include "Pins.FYSETC_S6.h"
-#endif
-#if PINMAP == BTT_SKR_PRO
-  #define PINMAP_STR "BTT SKR PRO v1.2"
-  #include "Pins.SKR_PRO.h"
 #endif
 #if PINMAP == JTWSTM
   #define PINMAP_STR "JTWSTM v2.1"
