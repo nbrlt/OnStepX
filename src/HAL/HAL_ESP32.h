@@ -14,6 +14,13 @@
 #ifndef ANALOG_WRITE_PWM_BITS
   #define ANALOG_WRITE_PWM_BITS 10
 #endif
+// DAC range
+#ifndef DAC_WRITE_RANGE
+  #define DAC_WRITE_RANGE 255
+#endif
+#ifndef DAC_VREF
+  #define DAC_VREF 3.3F
+#endif
 
 // Lower limit (fastest) step rate in uS for this platform (in SQW mode) and width of step pulse
 #if !defined(ESP_ARDUINO_VERSION) || ESP_ARDUINO_VERSION <= 131072 + 0 // version 2.0.0
