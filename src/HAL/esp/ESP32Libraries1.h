@@ -20,9 +20,9 @@
   #define ANALOG_WRITE_RANGE 255 // always use 2^n - 1, within the platform's limits
 #endif
 
-// DAC write
-#ifndef dacWriteEx
-  #define dacWriteEx(pin,value)     { dacWrite(pin,value*ANALOG_WRITE_RANGE/HAL_VCC); }
+// If present on SOC and pin supported, we use the analog DAC output. Fallback to PWM analogWrite if not a DAC pin.
+#if SOC_DAC_SUPPORTED
+	#define dacWriteEx(pin,value){if(pin != PIN_DAC1 && pin != PIN_DAC2) analogWrite(pin,value*ANALOG_WRITE_RANGE/HAL_VCC); else dacWrite(pin,value*ANALOG_WRITE_RANGE/HAL_VCC);}
 #endif
 
 // Lower limit (fastest) step rate for this platform (in SQW mode) and width of step pulse

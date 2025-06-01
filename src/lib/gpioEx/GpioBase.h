@@ -63,9 +63,9 @@
   #define analogWriteEx(pin,value)     { analogWrite(pin,value); }
 #endif
 
-// automatically use analogWriteEx for dacWriteEx if not defined in the HAL
+// automatically use the PWM output analogWriteEx function for dacWriteEx if not defined in the HAL. Value input for dacWriteEx is in volts.
 #ifndef dacWriteEx
-  #define dacWriteEx(pin,value)     { analogWriteEx(pin,value); }
+  #define dacWriteEx(pin,value)     { analogWriteEx(pin,value*ANALOG_WRITE_RANGE/HAL_VCC); }
 #endif
 
 // use "Ex" functions to exclude pins that are OFF or SHARED
