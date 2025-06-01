@@ -87,6 +87,10 @@
   #define PINMAP_STR "MaxSTM v3"
   #include "Pins.MaxSTM.h"
 #endif
+#if PINMAP == UniESP
+  #define PINMAP_STR "Unipolar Stepper ESP V1 "
+  #include "Pins.UniESP.h"
+#endif
 #ifndef PINMAP_STR
   #define PINMAP_STR "Unknown"
 #endif
