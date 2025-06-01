@@ -20,6 +20,11 @@
   #error "Configuration (Config.h): ANALOG_WRITE_RANGE can't be changed on this platform"
 #endif
 
+// DAC write
+#ifndef dacWriteEx
+  #define dacWriteEx(pin,value)     { dacWrite(pin,value*ANALOG_WRITE_RANGE/HAL_VCC); }
+#endif
+
 // Lower limit (fastest) step rate in us for this platform (in SQW mode) and width of step pulse
 #define HAL_MAXRATE_LOWER_LIMIT 40
 #define HAL_PULSE_WIDTH 200 // in ns, measured 1/18/22 (ESP32 v2.0.0)

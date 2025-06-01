@@ -18,6 +18,11 @@
   #define ANALOG_WRITE_RANGE 255 // always use 2^n - 1, within the platform's limits
 #endif
 
+// DAC write
+#ifndef dacWriteEx
+  #define dacWriteEx(pin,value)     { dacWrite(pin,value*ANALOG_WRITE_RANGE/HAL_VCC); }
+#endif
+
 // Lower limit (fastest) step rate in us for this platform (in SQW mode) and width of step pulse
 #define HAL_MAXRATE_LOWER_LIMIT 40
 #define HAL_PULSE_WIDTH 200 // in ns, measured 1/18/22 (ESP32 v2.0.0)

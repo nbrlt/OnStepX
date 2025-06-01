@@ -63,6 +63,11 @@
   #define analogWriteEx(pin,value)     { analogWrite(pin,value); }
 #endif
 
+// automatically use analogWriteEx for dacWriteEx if not defined in the HAL
+#ifndef dacWriteEx
+  #define dacWriteEx(pin,value)     { analogWriteEx(pin,value); }
+#endif
+
 // use "Ex" functions to exclude pins that are OFF or SHARED
 // pins in range 0x00 to 0xFF are normal, 0x100 to 0x1FF are DAC as digital outputs, 0x200 to 0x2FF are external GPIO pins
 #define CLEAN_PIN(pin) ((uint8_t)((pin) & 0xff))
