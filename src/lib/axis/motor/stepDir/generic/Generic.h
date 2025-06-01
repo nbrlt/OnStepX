@@ -56,6 +56,7 @@ class StepDirGeneric : StepDirDriver {
     int16_t m1Pin                  = OFF;
     int16_t m2Pin                  = OFF;
     int16_t decayPin               = OFF;
+    int16_t vrefpin                = OFF;
 };
 
 #endif

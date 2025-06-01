@@ -26,6 +26,17 @@ bool StepDirGeneric::init() {
   if (isDecayOnM2()) { decayPin = Pins->m2; m2Pin = OFF; } else { decayPin = Pins->decay; m2Pin = Pins->m2; }
   pinModeEx(decayPin, OUTPUT);
   digitalWriteEx(decayPin, getDecayPinState(settings.decay));
+  
+  // Enables current control if correctly defined
+  if (Pins->vref != OFF && settings.currentRun != OFF && settings.vrefDivider != OFF) {
+    vrefpin = Pins->vref;
+    pinModeEx(vrefpin, OUTPUT);
+    // automatically set goto and hold current if they are not already defined
+    if (settings.currentGoto == OFF) settings.currentGoto = settings.currentRun;
+    if (settings.currentHold == OFF) settings.currentHold = lround(settings.currentRun/2.0F);
+    // Setting Vref value
+    dacWriteEx(vrefpin, 0.001F*settings.currentHold*settings.vrefDivider);
+  } else {vrefpin = OFF;}
 
   #if DEBUG == VERBOSE
     VF("MSG: StepDirDriver"); V(axisNumber);
@@ -33,6 +44,13 @@ bool StepDirGeneric::init() {
     V(", m1="); if (Pins->m1 == OFF) VF("OFF"); else V(Pins->m1);
     V(", m2="); if (m2Pin == OFF) VF("OFF"); else V(m2Pin);
     V(", decay="); if (decayPin == OFF) VF("OFF"); else V(decayPin);
+	if(vrefpin != OFF) {
+	  V(", vref_pin="); V(vrefpin);
+	  V(", vref_divider="); V(settings.vrefDivider);
+	  V("Ihold="); V(settings.currentHold); VF("mA, ");
+	  V("Irun="); V(settings.currentRun); VF("mA, ");
+	  V("Igoto="); V(settings.currentGoto); VF("mA");
+	} else {VLF("current control OFF (set by hardware)");}
     if (settings.status == ON) {
       V(", fault="); if (Pins->fault == OFF) VF("OFF"); else V(Pins->fault);
     }
@@ -115,12 +133,14 @@ IRAM_ATTR int StepDirGeneric::modeMicrostepSlewing() {
 }
 
 void StepDirGeneric::modeDecayTracking() {
+  if (vrefpin != OFF) {dacWriteEx(vrefpin, 0.001F*settings.currentRun*settings.vrefDivider);}
   if (settings.decay == OFF) return;
   int8_t state = getDecayPinState(settings.decay);
   if (state != OFF) digitalWriteEx(decayPin, state);
 }
 
 void StepDirGeneric::modeDecaySlewing() {
+  if (vrefpin != OFF) {dacWriteEx(vrefpin, 0.001F*settings.currentGoto*settings.vrefDivider);}
   if (settings.decaySlewing == OFF) return;
   int8_t state = getDecayPinState(settings.decaySlewing);
   if (state != OFF) digitalWriteEx(decayPin, state);

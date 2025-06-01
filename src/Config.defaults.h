@@ -315,6 +315,9 @@
   #ifndef AXIS1_DRIVER_STATUS
   #define AXIS1_DRIVER_STATUS           OFF                       // driver status reporting (ON for TMC SPI or HIGH/LOW for fault pin)
   #endif
+  #ifndef AXIS1_DRIVER_VREF_DIVIDER
+  #define AXIS1_DRIVER_VREF_DIVIDER     OFF                       // driver Vref divider for current control: current =Vref_value/Vref_Divider, OFF for not used.
+  #endif
 #endif
 
 #if AXIS1_DRIVER_MODEL >= SERVO_DRIVER_FIRST && AXIS1_DRIVER_MODEL <= SERVO_DRIVER_LAST
@@ -493,6 +496,9 @@
   #endif
   #ifndef AXIS2_DRIVER_STATUS
   #define AXIS2_DRIVER_STATUS           OFF
+  #endif
+  #ifndef AXIS2_DRIVER_VREF_DIVIDER
+  #define AXIS2_DRIVER_VREF_DIVIDER     OFF                       // driver Vref divider for current control: current =Vref_value/Vref_Divider, OFF for not used.
   #endif
 #endif
 

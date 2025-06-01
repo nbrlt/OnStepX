@@ -18,6 +18,7 @@ typedef struct StepDirDriverPins {
   int16_t m3;
   int16_t decay;
   int16_t fault;
+  int16_t vref;
 } StepDirDriverPins;
 
 typedef struct StepDirDriverSettings {
@@ -31,6 +32,7 @@ typedef struct StepDirDriverSettings {
   int8_t  decay;
   int8_t  decaySlewing;
   int8_t  status;
+  float   vrefDivider;
 } StepDirDriverSettings;
 
 #ifndef TMC2130_RSENSE

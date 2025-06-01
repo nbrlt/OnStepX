@@ -245,6 +245,9 @@
 #ifndef AXIS1_SENSE_LIMIT_MAX_PIN
 #define AXIS1_SENSE_LIMIT_MAX_PIN   LIMIT_SENSE_PIN
 #endif
+#ifndef AXIS1_VREF_PIN
+#define AXIS1_VREF_PIN              OFF
+#endif
 
 #ifndef AXIS2_ENABLE_PIN
 #define AXIS2_ENABLE_PIN            OFF
@@ -287,6 +290,9 @@
 #endif
 #ifndef AXIS2_SENSE_LIMIT_MAX_PIN
 #define AXIS2_SENSE_LIMIT_MAX_PIN   LIMIT_SENSE_PIN
+#endif
+#ifndef AXIS2_VREF_PIN
+#define AXIS2_VREF_PIN              OFF
 #endif
 
 #ifndef AXIS3_ENABLE_PIN
